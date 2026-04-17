@@ -15,9 +15,10 @@
   --cream: #F7F3EC;
   --mid: rgba(247,243,236,0.55);
   --dim: rgba(247,243,236,0.25);
-  --s1: #9bc4d4;
-  --s2: #C9A96E;
-  --s3: #d49a7a;
+  --citrus: #d4a96e;
+  --floral: #c4a0b8;
+  --woody: #8fa882;
+  --herbal: #7ab5b0;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -62,7 +63,7 @@ nav {
 .hero-divider { width: 52px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 24px auto; animation: expand 1s 0.25s ease both; transform-origin: center; }
 .hero-sub { font-size: 14px; line-height: 2; letter-spacing: 0.05em; color: var(--mid); animation: fadeUp 0.8s 0.3s ease both; }
 
-.stage-filter {
+.scent-filter {
   position: relative; z-index: 1;
   display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
   padding: 0 32px 52px;
@@ -76,25 +77,26 @@ nav {
   cursor: pointer; transition: all 0.25s;
 }
 .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
-.filter-btn[data-stage="0"].active { border-color: var(--gold); color: var(--goldlt); background: rgba(201,169,110,0.08); }
-.filter-btn[data-stage="1"].active { border-color: var(--s1); color: var(--s1); background: rgba(155,196,212,0.07); }
-.filter-btn[data-stage="2"].active { border-color: var(--s2); color: var(--goldlt); background: rgba(201,169,110,0.07); }
-.filter-btn[data-stage="3"].active { border-color: var(--s3); color: var(--s3); background: rgba(212,154,122,0.07); }
+.filter-btn[data-note="all"].active { border-color: var(--gold); color: var(--goldlt); background: rgba(201,169,110,0.08); }
+.filter-btn[data-note="citrus"].active { border-color: var(--citrus); color: var(--citrus); background: rgba(212,169,110,0.07); }
+.filter-btn[data-note="floral"].active { border-color: var(--floral); color: var(--floral); background: rgba(196,160,184,0.07); }
+.filter-btn[data-note="woody"].active { border-color: var(--woody); color: var(--woody); background: rgba(143,168,130,0.07); }
+.filter-btn[data-note="herbal"].active { border-color: var(--herbal); color: var(--herbal); background: rgba(122,181,176,0.07); }
 
 .oils-section { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 0 32px 100px; }
-.stage-block { margin-bottom: 64px; }
-.stage-block.hidden { display: none; }
+.scent-block { margin-bottom: 64px; }
+.scent-block.hidden { display: none; }
 
-.stage-heading { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
-.stage-num { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; line-height: 1; opacity: 0.3; }
-.stage-tag { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 4px; }
-.stage-name { font-size: 15px; letter-spacing: 0.1em; font-weight: 400; }
-.stage-desc { font-size: 12px; color: var(--mid); margin-top: 3px; letter-spacing: 0.04em; }
-.stage-rule { flex: 1; height: 1px; background: currentColor; opacity: 0.12; }
+.scent-heading { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
+.scent-tag { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 4px; }
+.scent-name { font-size: 15px; letter-spacing: 0.1em; font-weight: 400; }
+.scent-desc { font-size: 12px; color: var(--mid); margin-top: 3px; letter-spacing: 0.04em; }
+.scent-rule { flex: 1; height: 1px; background: currentColor; opacity: 0.12; }
 
-.s1-color { color: var(--s1); }
-.s2-color { color: var(--goldlt); }
-.s3-color { color: var(--s3); }
+.citrus-color { color: var(--citrus); }
+.floral-color { color: var(--floral); }
+.woody-color { color: var(--woody); }
+.herbal-color { color: var(--herbal); }
 
 .oils-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
 
@@ -134,7 +136,7 @@ nav {
   .hero { padding: 116px 20px 56px; }
   .oils-section { padding: 0 20px 80px; }
   .oils-grid { grid-template-columns: 1fr; }
-  .stage-filter { padding: 0 20px 36px; }
+  .scent-filter { padding: 0 20px 36px; }
 }
 </style>
 </head>
@@ -156,31 +158,32 @@ nav {
     <div class="hero-label">Essential Oils · 品牌精油</div>
     <div class="hero-title">九款靈魂香氣</div>
     <div class="hero-divider"></div>
-    <div class="hero-sub">每一款精油，都對應一種你正在練習的內在狀態<br>從穩定自己，到理解自己，再到靠近彼此</div>
+    <div class="hero-sub">每一款精油，都對應一種你正在練習的內在狀態<br>找到屬於你的那一種香氣</div>
   </div>
 </div>
 
-<div class="stage-filter">
-  <button class="filter-btn active" data-stage="0">全部</button>
-  <button class="filter-btn" data-stage="1">第一階段 · 穩定</button>
-  <button class="filter-btn" data-stage="2">第二階段 · 理解</button>
-  <button class="filter-btn" data-stage="3">第三階段 · 靠近</button>
+<div class="scent-filter">
+  <button class="filter-btn active" data-note="all">全部</button>
+  <button class="filter-btn" data-note="citrus">柑橘調</button>
+  <button class="filter-btn" data-note="floral">花香調</button>
+  <button class="filter-btn" data-note="woody">木質調</button>
+  <button class="filter-btn" data-note="herbal">草本清新調</button>
 </div>
 
 <div class="oils-section">
 
-  <div class="stage-block" id="block-1">
-    <div class="stage-heading">
-      <div class="stage-num s1-color">01</div>
+  <!-- 柑橘調 -->
+  <div class="scent-block" id="block-citrus">
+    <div class="scent-heading">
       <div>
-        <div class="stage-tag s1-color">穩定 · Stabilize</div>
-        <div class="stage-name s1-color">認識自己的情緒底色</div>
-        <div class="stage-desc">先停下來，感覺自己在哪裡</div>
+        <div class="scent-tag citrus-color">柑橘調 · Citrus</div>
+        <div class="scent-name citrus-color">明亮、輕盈、帶來當下感</div>
+        <div class="scent-desc">清醒、活化，讓思緒重新流動</div>
       </div>
-      <div class="stage-rule s1-color"></div>
+      <div class="scent-rule citrus-color"></div>
     </div>
     <div class="oils-grid">
-      <a href="sweet-orange.html" class="oil-card" style="--ac:#9bc4d4;animation:fadeUp 0.6s 0.05s ease both">
+      <a href="sweet-orange.html" class="oil-card" style="--ac:#d4a96e;animation:fadeUp 0.6s 0.05s ease both">
         <div class="card-dot"></div>
         <div class="card-en">Sweet Orange</div>
         <div class="card-zh">甜橙</div>
@@ -191,7 +194,43 @@ nav {
           <div class="card-arrow">→</div>
         </div>
       </a>
-      <a href="lavender.html" class="oil-card" style="--ac:#9bc4d4;animation:fadeUp 0.6s 0.1s ease both">
+      <a href="litsea.html" class="oil-card" style="--ac:#d4a96e;animation:fadeUp 0.6s 0.1s ease both">
+        <div class="card-dot"></div>
+        <div class="card-en">Litsea Cubeba</div>
+        <div class="card-zh">山雞椒</div>
+        <div class="card-divider"></div>
+        <div class="card-quote">把話說清楚，不是攻擊。</div>
+        <div class="card-footer">
+          <div class="card-inci">Litsea Cubeba Fruit Oil</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+      <a href="lemon.html" class="oil-card" style="--ac:#d4a96e;animation:fadeUp 0.6s 0.15s ease both">
+        <div class="card-dot"></div>
+        <div class="card-en">Lemon</div>
+        <div class="card-zh">檸檬</div>
+        <div class="card-divider"></div>
+        <div class="card-quote">換個角度再看一次。</div>
+        <div class="card-footer">
+          <div class="card-inci">Citrus Limon Peel Oil</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 花香調 -->
+  <div class="scent-block" id="block-floral">
+    <div class="scent-heading">
+      <div>
+        <div class="scent-tag floral-color">花香調 · Floral</div>
+        <div class="scent-name floral-color">柔和、包容、回到自己</div>
+        <div class="scent-desc">溫柔承接情緒，給自己一個擁抱</div>
+      </div>
+      <div class="scent-rule floral-color"></div>
+    </div>
+    <div class="oils-grid">
+      <a href="lavender.html" class="oil-card" style="--ac:#c4a0b8;animation:fadeUp 0.6s 0.05s ease both">
         <div class="card-dot"></div>
         <div class="card-en">True Lavender</div>
         <div class="card-zh">真正薰衣草</div>
@@ -202,7 +241,7 @@ nav {
           <div class="card-arrow">→</div>
         </div>
       </a>
-      <a href="geranium.html" class="oil-card" style="--ac:#9bc4d4;animation:fadeUp 0.6s 0.15s ease both">
+      <a href="geranium.html" class="oil-card" style="--ac:#c4a0b8;animation:fadeUp 0.6s 0.1s ease both">
         <div class="card-dot"></div>
         <div class="card-en">Rose Geranium</div>
         <div class="card-zh">玫瑰天竺葵複方</div>
@@ -216,18 +255,18 @@ nav {
     </div>
   </div>
 
-  <div class="stage-block" id="block-2">
-    <div class="stage-heading">
-      <div class="stage-num s2-color">02</div>
+  <!-- 木質調 -->
+  <div class="scent-block" id="block-woody">
+    <div class="scent-heading">
       <div>
-        <div class="stage-tag s2-color">理解 · Understand</div>
-        <div class="stage-name s2-color">找到表達的語言</div>
-        <div class="stage-desc">知道自己想說什麼，也知道怎麼說</div>
+        <div class="scent-tag woody-color">木質調 · Woody</div>
+        <div class="scent-name woody-color">沉穩、落地、有結構感</div>
+        <div class="scent-desc">在說話之前先站穩自己</div>
       </div>
-      <div class="stage-rule s2-color"></div>
+      <div class="scent-rule woody-color"></div>
     </div>
     <div class="oils-grid">
-      <a href="cedar.html" class="oil-card" style="--ac:#C9A96E;animation:fadeUp 0.6s 0.05s ease both">
+      <a href="cedar.html" class="oil-card" style="--ac:#8fa882;animation:fadeUp 0.6s 0.05s ease both">
         <div class="card-dot"></div>
         <div class="card-en">Atlantic Cedarwood</div>
         <div class="card-zh">雪松</div>
@@ -238,7 +277,7 @@ nav {
           <div class="card-arrow">→</div>
         </div>
       </a>
-      <a href="cypress.html" class="oil-card" style="--ac:#C9A96E;animation:fadeUp 0.6s 0.1s ease both">
+      <a href="cypress.html" class="oil-card" style="--ac:#8fa882;animation:fadeUp 0.6s 0.1s ease both">
         <div class="card-dot"></div>
         <div class="card-en">Cypress</div>
         <div class="card-zh">絲柏</div>
@@ -249,32 +288,21 @@ nav {
           <div class="card-arrow">→</div>
         </div>
       </a>
-      <a href="litsea.html" class="oil-card" style="--ac:#C9A96E;animation:fadeUp 0.6s 0.15s ease both">
-        <div class="card-dot"></div>
-        <div class="card-en">Litsea Cubeba</div>
-        <div class="card-zh">山雞椒</div>
-        <div class="card-divider"></div>
-        <div class="card-quote">把話說清楚，不是攻擊。</div>
-        <div class="card-footer">
-          <div class="card-inci">Litsea Cubeba Fruit Oil</div>
-          <div class="card-arrow">→</div>
-        </div>
-      </a>
     </div>
   </div>
 
-  <div class="stage-block" id="block-3">
-    <div class="stage-heading">
-      <div class="stage-num s3-color">03</div>
+  <!-- 草本清新調 -->
+  <div class="scent-block" id="block-herbal">
+    <div class="scent-heading">
       <div>
-        <div class="stage-tag s3-color">靠近 · Connect</div>
-        <div class="stage-name s3-color">建立真實的連結</div>
-        <div class="stage-desc">帶著清明的自己，走向另一個人</div>
+        <div class="scent-tag herbal-color">草本清新調 · Herbal</div>
+        <div class="scent-name herbal-color">清醒、中性、創造空間</div>
+        <div class="scent-desc">讓思緒清明，給關係一點距離</div>
       </div>
-      <div class="stage-rule s3-color"></div>
+      <div class="scent-rule herbal-color"></div>
     </div>
     <div class="oils-grid">
-      <a href="eucalyptus.html" class="oil-card" style="--ac:#d49a7a;animation:fadeUp 0.6s 0.05s ease both">
+      <a href="eucalyptus.html" class="oil-card" style="--ac:#7ab5b0;animation:fadeUp 0.6s 0.05s ease both">
         <div class="card-dot"></div>
         <div class="card-en">Blue Gum Eucalyptus</div>
         <div class="card-zh">藍膠尤加利</div>
@@ -285,7 +313,7 @@ nav {
           <div class="card-arrow">→</div>
         </div>
       </a>
-      <a href="tea-tree.html" class="oil-card" style="--ac:#d49a7a;animation:fadeUp 0.6s 0.1s ease both">
+      <a href="tea-tree.html" class="oil-card" style="--ac:#7ab5b0;animation:fadeUp 0.6s 0.1s ease both">
         <div class="card-dot"></div>
         <div class="card-en">Tea Tree</div>
         <div class="card-zh">茶樹</div>
@@ -293,17 +321,6 @@ nav {
         <div class="card-quote">不讓情緒污染彼此。</div>
         <div class="card-footer">
           <div class="card-inci">Melaleuca Alternifolia Leaf Oil</div>
-          <div class="card-arrow">→</div>
-        </div>
-      </a>
-      <a href="lemon.html" class="oil-card" style="--ac:#d49a7a;animation:fadeUp 0.6s 0.15s ease both">
-        <div class="card-dot"></div>
-        <div class="card-en">Lemon</div>
-        <div class="card-zh">檸檬</div>
-        <div class="card-divider"></div>
-        <div class="card-quote">換個角度再看一次。</div>
-        <div class="card-footer">
-          <div class="card-inci">Citrus Limon Peel Oil</div>
           <div class="card-arrow">→</div>
         </div>
       </a>
@@ -327,18 +344,23 @@ for(let i = 0; i < 90; i++) {
 }
 
 const btns = document.querySelectorAll('.filter-btn');
-const blocks = { 1: document.getElementById('block-1'), 2: document.getElementById('block-2'), 3: document.getElementById('block-3') };
+const blocks = {
+  citrus: document.getElementById('block-citrus'),
+  floral: document.getElementById('block-floral'),
+  woody: document.getElementById('block-woody'),
+  herbal: document.getElementById('block-herbal')
+};
 
 btns.forEach(btn => {
   btn.addEventListener('click', () => {
     btns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const stage = parseInt(btn.dataset.stage);
-    if (stage === 0) {
+    const note = btn.dataset.note;
+    if (note === 'all') {
       Object.values(blocks).forEach(b => b.classList.remove('hidden'));
     } else {
       Object.entries(blocks).forEach(([k, b]) => {
-        b.classList.toggle('hidden', parseInt(k) !== stage);
+        b.classList.toggle('hidden', k !== note);
       });
     }
   });
